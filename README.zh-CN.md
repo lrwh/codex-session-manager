@@ -38,8 +38,8 @@
 日常最常用的是这两个：
 
 ```bash
-./dist/csm
-./dist/csm dashboard
+csm
+csm dashboard
 ```
 
 含义分别是：
@@ -52,6 +52,8 @@
 最新安装包可从 GitHub Releases 获取：
 
 `https://github.com/lrwh/codex-session-manager/releases/latest`
+
+请选择对应平台的安装包，并把 `csm` 安装到系统 `PATH` 中。
 
 ### Linux
 
@@ -106,77 +108,55 @@ csm update
 ### 1. 初始化
 
 ```bash
-go run ./cmd/csm init
+csm init
 ```
 
 ### 2. 添加 Codex 数据源
 
 ```bash
-go run ./cmd/csm source add ~/.codex
-go run ./cmd/csm source list
+csm source add ~/.codex
+csm source list
 ```
 
 ### 3. 扫描 session
 
 ```bash
-go run ./cmd/csm scan
+csm scan
 ```
 
 ### 4. 直接列出 session
 
 ```bash
-go run ./cmd/csm
-go run ./cmd/csm -n 20
-go run ./cmd/csm --verbose -n 1
-go run ./cmd/csm --json -n 10
+csm
+csm -n 20
+csm --verbose -n 1
+csm --json -n 10
 ```
 
 ### 5. 打开 Dashboard
 
 ```bash
-go run ./cmd/csm dashboard
-go run ./cmd/csm dashboard --no-open
-go run ./cmd/csm dashboard --addr 127.0.0.1:7788
+csm dashboard
+csm dashboard --no-open
+csm dashboard --addr 127.0.0.1:7788
 ```
 
 ### 6. 搜索和聚类
 
 ```bash
-go run ./cmd/csm find 聚类
-go run ./cmd/csm cluster rebuild
-go run ./cmd/csm cluster list -n 20
-go run ./cmd/csm show <cluster-id>
-go run ./cmd/csm tag set <cluster-id> 我的簇
-go run ./cmd/csm cluster merge <target-cluster-id> <source-cluster-id...>
-go run ./cmd/csm cluster split <source-cluster-id> <session-id...>
-go run ./cmd/csm cluster reset <cluster-id>
+csm find 聚类
+csm cluster rebuild
+csm cluster list -n 20
+csm show <cluster-id>
+csm tag set <cluster-id> 我的簇
+csm cluster merge <target-cluster-id> <source-cluster-id...>
+csm cluster split <source-cluster-id> <session-id...>
+csm cluster reset <cluster-id>
 ```
 
-## 构建
+## 从源码构建
 
-```bash
-make test
-make build
-```
-
-编译完成后：
-
-```bash
-./dist/csm --help
-./dist/csm dashboard
-```
-
-跨平台构建：
-
-```bash
-make build-all
-```
-
-输出目录：
-
-```text
-dist/
-```
+源码构建和打包说明见 [BUILD.zh-CN.md](./BUILD.zh-CN.md)。
 
 ## 本地数据
 
@@ -189,7 +169,7 @@ dist/
 可通过环境变量覆盖：
 
 ```bash
-CSM_HOME=/path/to/csm-home ./dist/csm
+CSM_HOME=/path/to/csm-home csm
 ```
 
 主要文件：

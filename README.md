@@ -37,8 +37,8 @@ Its core purpose is simple:
 ## Main entry points
 
 ```bash
-./dist/csm
-./dist/csm dashboard
+csm
+csm dashboard
 ```
 
 - `csm`: scan and print session list
@@ -49,6 +49,8 @@ Its core purpose is simple:
 Download the latest package from GitHub Releases:
 
 `https://github.com/lrwh/codex-session-manager/releases/latest`
+
+Use the package that matches your platform, then install `csm` into your `PATH`.
 
 ### Linux
 
@@ -103,77 +105,55 @@ Notes:
 ### 1. Initialize
 
 ```bash
-go run ./cmd/csm init
+csm init
 ```
 
 ### 2. Add a Codex source
 
 ```bash
-go run ./cmd/csm source add ~/.codex
-go run ./cmd/csm source list
+csm source add ~/.codex
+csm source list
 ```
 
 ### 3. Scan sessions
 
 ```bash
-go run ./cmd/csm scan
+csm scan
 ```
 
 ### 4. Print sessions directly
 
 ```bash
-go run ./cmd/csm
-go run ./cmd/csm -n 20
-go run ./cmd/csm --verbose -n 1
-go run ./cmd/csm --json -n 10
+csm
+csm -n 20
+csm --verbose -n 1
+csm --json -n 10
 ```
 
 ### 5. Start the dashboard
 
 ```bash
-go run ./cmd/csm dashboard
-go run ./cmd/csm dashboard --no-open
-go run ./cmd/csm dashboard --addr 127.0.0.1:7788
+csm dashboard
+csm dashboard --no-open
+csm dashboard --addr 127.0.0.1:7788
 ```
 
 ### 6. Search and cluster operations
 
 ```bash
-go run ./cmd/csm find session
-go run ./cmd/csm cluster rebuild
-go run ./cmd/csm cluster list -n 20
-go run ./cmd/csm show <cluster-id>
-go run ./cmd/csm tag set <cluster-id> my-cluster
-go run ./cmd/csm cluster merge <target-cluster-id> <source-cluster-id...>
-go run ./cmd/csm cluster split <source-cluster-id> <session-id...>
-go run ./cmd/csm cluster reset <cluster-id>
+csm find session
+csm cluster rebuild
+csm cluster list -n 20
+csm show <cluster-id>
+csm tag set <cluster-id> my-cluster
+csm cluster merge <target-cluster-id> <source-cluster-id...>
+csm cluster split <source-cluster-id> <session-id...>
+csm cluster reset <cluster-id>
 ```
 
-## Build
+## Build From Source
 
-```bash
-make test
-make build
-```
-
-After building:
-
-```bash
-./dist/csm --help
-./dist/csm dashboard
-```
-
-Cross-platform binaries:
-
-```bash
-make build-all
-```
-
-Build output:
-
-```text
-dist/
-```
+For source build and packaging, see [BUILD.md](./BUILD.md).
 
 ## Local data
 
@@ -186,7 +166,7 @@ Default working directory:
 Override with:
 
 ```bash
-CSM_HOME=/path/to/csm-home ./dist/csm
+CSM_HOME=/path/to/csm-home csm
 ```
 
 Main local files:
