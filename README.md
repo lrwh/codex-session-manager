@@ -1,70 +1,69 @@
 # CSM
 
-`CSM` 是一个轻量的 Codex Session 管理工具，项目名为 `codex-session-manager`。
+English | [简体中文](./README.zh-CN.md)
 
-它的核心目标很直接：
+`CSM` stands for `codex-session-manager`.
 
-> 当大家在多个 Codex 账号之间切换后，原来的 session 往往不容易再找到，`CSM` 就是为“找回 session”这件事做的。
+Its core purpose is simple:
+
+> when people switch between multiple Codex accounts, old sessions become hard to find again. `CSM` is built to solve that specific problem.
 
 ![CSM Dashboard](./csm.png)
 
-`CSM` 用于本地扫描和查看 Codex 历史会话，重点解决这几件事：
+`CSM` is a lightweight local tool for scanning and browsing Codex sessions. It focuses on a few practical workflows:
 
-- 在多账号切换之后，尽快重新定位历史 session
-- 用一个命令快速列出全部 session
-- 在本地 Dashboard 中检索、筛选、查看 session 详情
-- 展示可直接恢复会话的命令
-- 统计用户消息数、总消息数、工作目录和原始文件路径
-- 保留 cluster 能力，但不把 cluster 当主入口
+- help users recover old sessions after switching across multiple Codex accounts
+- list all sessions with a single command
+- browse sessions in a local dashboard
+- search by title, session id, preview, cwd, or file path
+- show a ready-to-copy resume command for each session
+- keep cluster operations available without making cluster the primary entry point
 
-## 特性
+## Features
 
-- Go 实现，支持 Windows、macOS、Linux
-- 本地单机使用，不依赖数据库和外部服务
-- 数据存储为本地 JSON / JSONL 文件
-- 支持多数据源扫描
-- 支持 CLI 和本地 Dashboard 两种使用方式
-- 支持手工聚类操作：`merge`、`split`、`tag`、`reset`
-- session 标题优先读取 Codex 原生命名：
-  - `~/.codex/session_index.jsonl` 中的 `thread_name`
-  - session 原文件中的 `thread_name_updated`
+- Written in Go
+- Works on Windows, macOS, and Linux
+- No database
+- No external service dependency
+- Local JSON / JSONL storage
+- CLI and local dashboard modes
+- Manual cluster operations: `merge`, `split`, `tag`, `reset`
+- Session titles prefer native Codex naming:
+  - `thread_name` from `~/.codex/session_index.jsonl`
+  - `thread_name_updated` from the session rollout file
 
-## 当前主入口
-
-日常最常用的是这两个：
+## Main entry points
 
 ```bash
 ./dist/csm
 ./dist/csm dashboard
 ```
 
-含义分别是：
+- `csm`: scan and print session list
+- `csm dashboard`: open the local web dashboard
 
-- `csm`：自动扫描后直接列出 session
-- `csm dashboard`：启动本地 Web 页面查看 session 统计和明细
+## Quick Start
 
-## 快速开始
-
-### 1. 初始化
+### 1. Initialize
 
 ```bash
 go run ./cmd/csm init
 ```
 
-### 2. 添加 Codex 数据源
+### 2. Add a Codex source
 
 ```bash
 go run ./cmd/csm source add ~/.codex
 go run ./cmd/csm source list
 ```
 
-### 3. 扫描 session
+### 3. Scan sessions
 
 ```bash
 go run ./cmd/csm scan
 ```
 
-### 4. 直接列出 session
+### 4. Print sessions directly
 
 ```bash
 go run ./cmd/csm
@@ -73,7 +72,7 @@ go run ./cmd/csm --verbose -n 1
 go run ./cmd/csm --json -n 10
 ```
 
-### 5. 打开 Dashboard
+### 5. Start the dashboard
 
 ```bash
 go run ./cmd/csm dashboard
@@ -81,60 +80,60 @@ go run ./cmd/csm dashboard --no-open
 go run ./cmd/csm dashboard --addr 127.0.0.1:7788
 ```
 
-### 6. 搜索和聚类
+### 6. Search and cluster operations
 
 ```bash
-go run ./cmd/csm find 聚类
+go run ./cmd/csm find session
 go run ./cmd/csm cluster rebuild
 go run ./cmd/csm cluster list -n 20
 go run ./cmd/csm show <cluster-id>
-go run ./cmd/csm tag set <cluster-id> 我的簇
+go run ./cmd/csm tag set <cluster-id> my-cluster
 go run ./cmd/csm cluster merge <target-cluster-id> <source-cluster-id...>
 go run ./cmd/csm cluster split <source-cluster-id> <session-id...>
 go run ./cmd/csm cluster reset <cluster-id>
 ```
 
-## 构建
+## Build
 
 ```bash
 make test
 make build
 ```
 
-编译完成后：
+After building:
 
 ```bash
 ./dist/csm --help
 ./dist/csm dashboard
 ```
 
-跨平台构建：
+Cross-platform binaries:
 
 ```bash
 make build-all
 ```
 
-输出目录：
+Build output:
 
 ```text
 dist/
 ```
 
-## 本地数据
+## Local data
 
-默认工作目录：
+Default working directory:
 
 ```text
 ~/.config/csm
 ```
 
-可通过环境变量覆盖：
+Override with:
 
 ```bash
 CSM_HOME=/path/to/csm-home ./dist/csm
 ```
 
-主要文件：
+Main local files:
 
 - `config.json`
 - `sources.json`
@@ -142,7 +141,7 @@ CSM_HOME=/path/to/csm-home ./dist/csm
 - `clusters.json`
 - `tags.json`
 
-## 命令概览
+## Command overview
 
 ```bash
 csm
@@ -163,13 +162,13 @@ csm tag set <cluster-id> <name>
 csm tag remove <cluster-id>
 ```
 
-## 说明
+## Notes
 
-- `CSM` 首先是一个“找回 session”的产品，而不是一个复杂的聚类平台
-- `CSM` 当前把 session 作为主入口，cluster 作为辅助能力
-- session 标题只认 Codex 原生命名，不读取第三方 UI 的本地别名
-- 如果某条 session 没有原生命名，才会回退到消息摘要标题
+- `CSM` is primarily a session recovery product, not a cluster-heavy platform
+- `CSM` is session-first; cluster is secondary
+- Session titles only use native Codex rename sources
+- If a session has no native rename metadata, `CSM` falls back to a derived summary title
 
 ## License
 
-当前仓库未附带正式 License，如需开源发布，建议补充 `MIT` 或 `Apache-2.0`。
+No license file is included yet. Add `MIT` or `Apache-2.0` before publishing publicly.
