@@ -2,10 +2,15 @@
 
 `CSM` 是一个轻量的 Codex Session 管理工具，项目名为 `codex-session-manager`。
 
+它的核心目标很直接：
+
+> 当大家在多个 Codex 账号之间切换后，原来的 session 往往不容易再找到，`CSM` 就是为“找回 session”这件事做的。
+
 ![CSM Dashboard](./csm.png)
 
 `CSM` 用于本地扫描和查看 Codex 历史会话，重点解决这几件事：
 
+- 在多账号切换之后，尽快重新定位历史 session
 - 用一个命令快速列出全部 session
 - 在本地 Dashboard 中检索、筛选、查看 session 详情
 - 展示可直接恢复会话的命令
@@ -160,6 +165,7 @@ csm tag remove <cluster-id>
 
 ## 说明
 
+- `CSM` 首先是一个“找回 session”的产品，而不是一个复杂的聚类平台
 - `CSM` 当前把 session 作为主入口，cluster 作为辅助能力
 - session 标题只认 Codex 原生命名，不读取第三方 UI 的本地别名
 - 如果某条 session 没有原生命名，才会回退到消息摘要标题

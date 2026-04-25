@@ -2,10 +2,15 @@
 
 `CSM` stands for `codex-session-manager`.
 
+Its core purpose is simple:
+
+> when people switch between multiple Codex accounts, old sessions become hard to find again. `CSM` is built to solve that specific problem.
+
 ![CSM Dashboard](./csm.png)
 
 `CSM` is a lightweight local tool for scanning and browsing Codex sessions. It focuses on a few practical workflows:
 
+- help users recover old sessions after switching across multiple Codex accounts
 - list all sessions with a single command
 - browse sessions in a local dashboard
 - search by title, session id, preview, cwd, or file path
@@ -157,6 +162,7 @@ csm tag remove <cluster-id>
 
 ## Notes
 
+- `CSM` is primarily a session recovery product, not a cluster-heavy platform
 - `CSM` is session-first; cluster is secondary
 - Session titles only use native Codex rename sources
 - If a session has no native rename metadata, `CSM` falls back to a derived summary title
