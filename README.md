@@ -4,6 +4,8 @@ English | [简体中文](./README.zh-CN.md)
 
 `CSM` stands for `codex-session-manager`.
 
+Current version: `0.1.0`
+
 Its core purpose is simple:
 
 > when people switch between multiple Codex accounts, old sessions become hard to find again. `CSM` is built to solve that specific problem.
@@ -93,6 +95,14 @@ go run ./cmd/csm cluster split <source-cluster-id> <session-id...>
 go run ./cmd/csm cluster reset <cluster-id>
 ```
 
+### 7. Update
+
+```bash
+csm update
+```
+
+`csm update` pulls the latest release package from GitHub Releases and updates the current executable on supported platforms.
+
 ## Build
 
 ```bash
@@ -152,6 +162,7 @@ csm source list
 csm scan
 csm find <query>
 csm dashboard
+csm update
 csm cluster rebuild
 csm cluster list
 csm cluster merge

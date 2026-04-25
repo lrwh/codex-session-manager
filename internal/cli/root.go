@@ -4,7 +4,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var Version = "dev"
+var Version = "0.1.0"
 var rootSessionLimit int
 var rootSessionJSON bool
 var rootSessionVerbose bool
@@ -41,4 +41,5 @@ func init() {
 	rootCmd.AddCommand(newSourceCommand())
 	rootCmd.AddCommand(newTagCommand())
 	rootCmd.AddCommand(newUICommand())
+	rootCmd.AddCommand(newUpdateCommand())
 }

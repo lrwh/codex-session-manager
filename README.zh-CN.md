@@ -4,6 +4,8 @@
 
 `CSM` 是一个轻量的 Codex Session 管理工具，项目名为 `codex-session-manager`。
 
+当前版本：`0.1.0`
+
 它的核心目标很直接：
 
 > 当大家在多个 Codex 账号之间切换后，原来的 session 往往不容易再找到，`CSM` 就是为“找回 session”这件事做的。
@@ -96,6 +98,14 @@ go run ./cmd/csm cluster split <source-cluster-id> <session-id...>
 go run ./cmd/csm cluster reset <cluster-id>
 ```
 
+### 7. 更新
+
+```bash
+csm update
+```
+
+`csm update` 会从 GitHub Releases 拉取当前平台的最新发布包，并在支持的平台上更新当前可执行文件。
+
 ## 构建
 
 ```bash
@@ -155,6 +165,7 @@ csm source list
 csm scan
 csm find <query>
 csm dashboard
+csm update
 csm cluster rebuild
 csm cluster list
 csm cluster merge
