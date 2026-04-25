@@ -15,7 +15,7 @@ func newUICommand() *cobra.Command {
 	command := &cobra.Command{
 		Use:     "dashboard",
 		Aliases: []string{"ui"},
-		Short:   "启动本地 Dashboard 查看 CSM 数据",
+		Short:   "启动本地 Dashboard，并在需要时自动初始化和准备数据",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			application, err := app.New()
 			if err != nil {

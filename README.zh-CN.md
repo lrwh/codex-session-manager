@@ -45,7 +45,7 @@ csm dashboard
 含义分别是：
 
 - `csm`：自动扫描后直接列出 session
-- `csm dashboard`：启动本地 Web 页面查看 session 统计和明细
+- `csm dashboard`：启动本地 Web 页面；首次运行时会自动准备数据
 
 ## 安装
 
@@ -105,26 +105,43 @@ csm update
 
 ## 快速开始
 
-### 1. 初始化
+### 1. 最快启动方式
+
+如果是第一次使用，可以直接执行：
+
+```bash
+csm dashboard
+```
+
+首次执行 `csm dashboard` 时，会自动：
+
+- 创建本地 `CSM_HOME`
+- 创建 `config.json` 和 `sources.json`
+- 如果存在 `~/.codex`，自动把它加入默认数据源
+- 扫描 session 并重建 cluster 数据
+
+### 2. 如果你想显式控制，再手动执行初始化
 
 ```bash
 csm init
 ```
 
-### 2. 添加 Codex 数据源
+`csm init` 不是必需步骤，它只是显式创建本地工作文件。
+
+### 3. 添加 Codex 数据源
 
 ```bash
 csm source add ~/.codex
 csm source list
 ```
 
-### 3. 扫描 session
+### 4. 扫描 session
 
 ```bash
 csm scan
 ```
 
-### 4. 直接列出 session
+### 5. 直接列出 session
 
 ```bash
 csm
@@ -133,7 +150,7 @@ csm --verbose -n 1
 csm --json -n 10
 ```
 
-### 5. 打开 Dashboard
+### 6. 打开 Dashboard
 
 ```bash
 csm dashboard
@@ -141,7 +158,7 @@ csm dashboard --no-open
 csm dashboard --addr 127.0.0.1:7788
 ```
 
-### 6. 搜索和聚类
+### 7. 搜索和聚类
 
 ```bash
 csm find 聚类

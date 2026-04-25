@@ -42,7 +42,7 @@ csm dashboard
 ```
 
 - `csm`: scan and print session list
-- `csm dashboard`: open the local web dashboard
+- `csm dashboard`: open the local web dashboard and auto-prepare data on first run
 
 ## Install
 
@@ -102,26 +102,43 @@ Notes:
 
 ## Quick Start
 
-### 1. Initialize
+### 1. Fastest start
+
+If this is your first run, you can start directly with:
+
+```bash
+csm dashboard
+```
+
+On first run, `csm dashboard` will automatically:
+
+- create the local CSM home
+- create `config.json` and `sources.json`
+- add `~/.codex` as the default source when available
+- scan sessions and rebuild cluster data
+
+### 2. Initialize manually if you want explicit control
 
 ```bash
 csm init
 ```
 
-### 2. Add a Codex source
+`csm init` is optional. It only creates the local working files explicitly.
+
+### 3. Add a Codex source
 
 ```bash
 csm source add ~/.codex
 csm source list
 ```
 
-### 3. Scan sessions
+### 4. Scan sessions
 
 ```bash
 csm scan
 ```
 
-### 4. Print sessions directly
+### 5. Print sessions directly
 
 ```bash
 csm
@@ -130,7 +147,7 @@ csm --verbose -n 1
 csm --json -n 10
 ```
 
-### 5. Start the dashboard
+### 6. Start the dashboard
 
 ```bash
 csm dashboard
@@ -138,7 +155,7 @@ csm dashboard --no-open
 csm dashboard --addr 127.0.0.1:7788
 ```
 
-### 6. Search and cluster operations
+### 7. Search and cluster operations
 
 ```bash
 csm find session
