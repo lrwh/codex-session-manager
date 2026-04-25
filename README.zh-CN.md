@@ -47,6 +47,60 @@
 - `csm`：自动扫描后直接列出 session
 - `csm dashboard`：启动本地 Web 页面查看 session 统计和明细
 
+## 安装
+
+最新安装包可从 GitHub Releases 获取：
+
+`https://github.com/lrwh/codex-session-manager/releases/latest`
+
+### Linux
+
+```bash
+curl -L -o csm-linux-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-linux-amd64-0.1.0.tar.gz
+tar -xzf csm-linux-amd64.tar.gz
+sudo install -m 755 csm-linux-amd64 /usr/local/bin/csm
+csm --version
+```
+
+### macOS Intel
+
+```bash
+curl -L -o csm-darwin-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-amd64-0.1.0.tar.gz
+tar -xzf csm-darwin-amd64.tar.gz
+sudo install -m 755 csm-darwin-amd64 /usr/local/bin/csm
+csm --version
+```
+
+### macOS Apple Silicon
+
+```bash
+curl -L -o csm-darwin-arm64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-arm64-0.1.0.tar.gz
+tar -xzf csm-darwin-arm64.tar.gz
+sudo install -m 755 csm-darwin-arm64 /usr/local/bin/csm
+csm --version
+```
+
+### Windows
+
+1. 从 Releases 下载 `csm-windows-amd64-0.1.0.zip`
+2. 解压后将 `csm-windows-amd64.exe` 重命名为 `csm.exe`
+3. 放到固定目录，例如 `C:\Tools\csm\`
+4. 把该目录加入 `PATH`
+5. 新开终端执行 `csm --version`
+
+## 更新
+
+安装完成后，可直接执行：
+
+```bash
+csm update
+```
+
+说明：
+
+- Linux 和 macOS 会尝试自动替换当前可执行文件
+- Windows 当前会下载最新包，并提示手工替换
+
 ## 快速开始
 
 ### 1. 初始化
@@ -97,14 +151,6 @@ go run ./cmd/csm cluster merge <target-cluster-id> <source-cluster-id...>
 go run ./cmd/csm cluster split <source-cluster-id> <session-id...>
 go run ./cmd/csm cluster reset <cluster-id>
 ```
-
-### 7. 更新
-
-```bash
-csm update
-```
-
-`csm update` 会从 GitHub Releases 拉取当前平台的最新发布包，并在支持的平台上更新当前可执行文件。
 
 ## 构建
 

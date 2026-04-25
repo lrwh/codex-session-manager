@@ -44,6 +44,60 @@ Its core purpose is simple:
 - `csm`: scan and print session list
 - `csm dashboard`: open the local web dashboard
 
+## Install
+
+Download the latest package from GitHub Releases:
+
+`https://github.com/lrwh/codex-session-manager/releases/latest`
+
+### Linux
+
+```bash
+curl -L -o csm-linux-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-linux-amd64-0.1.0.tar.gz
+tar -xzf csm-linux-amd64.tar.gz
+sudo install -m 755 csm-linux-amd64 /usr/local/bin/csm
+csm --version
+```
+
+### macOS Intel
+
+```bash
+curl -L -o csm-darwin-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-amd64-0.1.0.tar.gz
+tar -xzf csm-darwin-amd64.tar.gz
+sudo install -m 755 csm-darwin-amd64 /usr/local/bin/csm
+csm --version
+```
+
+### macOS Apple Silicon
+
+```bash
+curl -L -o csm-darwin-arm64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-arm64-0.1.0.tar.gz
+tar -xzf csm-darwin-arm64.tar.gz
+sudo install -m 755 csm-darwin-arm64 /usr/local/bin/csm
+csm --version
+```
+
+### Windows
+
+1. Download `csm-windows-amd64-0.1.0.zip` from Releases.
+2. Unzip it and rename `csm-windows-amd64.exe` to `csm.exe`.
+3. Move it to a stable directory such as `C:\Tools\csm\`.
+4. Add that directory to `PATH`.
+5. Open a new terminal and run `csm --version`.
+
+## Update
+
+After installation, update with:
+
+```bash
+csm update
+```
+
+Notes:
+
+- Linux and macOS can replace the current executable automatically
+- Windows currently downloads the latest package and prompts for manual replacement
+
 ## Quick Start
 
 ### 1. Initialize
@@ -94,14 +148,6 @@ go run ./cmd/csm cluster merge <target-cluster-id> <source-cluster-id...>
 go run ./cmd/csm cluster split <source-cluster-id> <session-id...>
 go run ./cmd/csm cluster reset <cluster-id>
 ```
-
-### 7. Update
-
-```bash
-csm update
-```
-
-`csm update` pulls the latest release package from GitHub Releases and updates the current executable on supported platforms.
 
 ## Build
 
