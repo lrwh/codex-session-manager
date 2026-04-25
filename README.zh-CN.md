@@ -211,4 +211,4 @@ csm tag remove <cluster-id>
 
 ## License
 
-当前仓库未附带正式 License，如需开源发布，建议补充 `MIT` 或 `Apache-2.0`。
+当前项目使用 `Apache-2.0` 许可证，详见 [LICENSE](./LICENSE)。

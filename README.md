@@ -208,4 +208,4 @@ csm tag remove <cluster-id>
 
 ## License
 
-No license file is included yet. Add `MIT` or `Apache-2.0` before publishing publicly.
+Licensed under `Apache-2.0`. See [LICENSE](./LICENSE).
