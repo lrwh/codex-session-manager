@@ -156,7 +156,7 @@ csm cluster reset <cluster-id>
 
 ## 从源码构建
 
-源码构建和打包说明见 [BUILD.zh-CN.md](./BUILD.zh-CN.md)。
+源码构建和打包说明见 [BUILD.md](./BUILD.md)。
 
 ## 本地数据
 

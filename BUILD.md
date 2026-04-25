@@ -1,7 +1,5 @@
 # Build CSM
 
-[简体中文](./BUILD.zh-CN.md)
-
 This document covers source build, local run, and release packaging.
 
 ## Requirements
