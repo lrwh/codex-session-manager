@@ -4,7 +4,7 @@ English | [简体中文](./README.zh-CN.md)
 
 `CSM` stands for `codex-session-manager`.
 
-Current version: `0.1.0`
+Current version: `0.2.0`
 
 Its core purpose is simple:
 
@@ -17,6 +17,8 @@ Its core purpose is simple:
 - help users recover old sessions after switching across multiple Codex accounts
 - list all sessions with a single command
 - browse sessions in a local dashboard
+- open a session detail page and inspect the full conversation timeline
+- search inside a single session detail view
 - search by title, session id, preview, cwd, or file path
 - show a ready-to-copy resume command for each session
 - keep cluster operations available without making cluster the primary entry point
@@ -29,6 +31,7 @@ Its core purpose is simple:
 - No external service dependency
 - Local JSON / JSONL storage
 - CLI and local dashboard modes
+- Session detail page with full content timeline and in-page search
 - Manual cluster operations: `merge`, `split`, `tag`, `reset`
 - Session titles prefer native Codex naming:
   - `thread_name` from `~/.codex/session_index.jsonl`
@@ -55,7 +58,7 @@ Use the package that matches your platform, then install `csm` into your `PATH`.
 ### Linux
 
 ```bash
-curl -L -o csm-linux-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-linux-amd64-0.1.0.tar.gz
+curl -L -o csm-linux-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-linux-amd64-0.2.0.tar.gz
 tar -xzf csm-linux-amd64.tar.gz
 sudo install -m 755 csm-linux-amd64 /usr/local/bin/csm
 csm --version
@@ -64,7 +67,7 @@ csm --version
 ### macOS Intel
 
 ```bash
-curl -L -o csm-darwin-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-amd64-0.1.0.tar.gz
+curl -L -o csm-darwin-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-amd64-0.2.0.tar.gz
 tar -xzf csm-darwin-amd64.tar.gz
 sudo install -m 755 csm-darwin-amd64 /usr/local/bin/csm
 csm --version
@@ -73,7 +76,7 @@ csm --version
 ### macOS Apple Silicon
 
 ```bash
-curl -L -o csm-darwin-arm64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-arm64-0.1.0.tar.gz
+curl -L -o csm-darwin-arm64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-arm64-0.2.0.tar.gz
 tar -xzf csm-darwin-arm64.tar.gz
 sudo install -m 755 csm-darwin-arm64 /usr/local/bin/csm
 csm --version
@@ -81,7 +84,7 @@ csm --version
 
 ### Windows
 
-1. Download `csm-windows-amd64-0.1.0.zip` from Releases.
+1. Download `csm-windows-amd64-0.2.0.zip` from Releases.
 2. Unzip it and rename `csm-windows-amd64.exe` to `csm.exe`.
 3. Move it to a stable directory such as `C:\Tools\csm\`.
 4. Add that directory to `PATH`.

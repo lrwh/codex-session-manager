@@ -4,7 +4,7 @@
 
 `CSM` 是一个轻量的 Codex Session 管理工具，项目名为 `codex-session-manager`。
 
-当前版本：`0.1.0`
+当前版本：`0.2.0`
 
 它的核心目标很直接：
 
@@ -17,6 +17,8 @@
 - 在多账号切换之后，尽快重新定位历史 session
 - 用一个命令快速列出全部 session
 - 在本地 Dashboard 中检索、筛选、查看 session 详情
+- 打开 session 详情页，查看完整会话时间线
+- 在单个 session 详情页内继续搜索
 - 展示可直接恢复会话的命令
 - 统计用户消息数、总消息数、工作目录和原始文件路径
 - 保留 cluster 能力，但不把 cluster 当主入口
@@ -28,6 +30,7 @@
 - 数据存储为本地 JSON / JSONL 文件
 - 支持多数据源扫描
 - 支持 CLI 和本地 Dashboard 两种使用方式
+- 支持 session 详情页和页内搜索
 - 支持手工聚类操作：`merge`、`split`、`tag`、`reset`
 - session 标题优先读取 Codex 原生命名：
   - `~/.codex/session_index.jsonl` 中的 `thread_name`
@@ -58,7 +61,7 @@ csm dashboard
 ### Linux
 
 ```bash
-curl -L -o csm-linux-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-linux-amd64-0.1.0.tar.gz
+curl -L -o csm-linux-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-linux-amd64-0.2.0.tar.gz
 tar -xzf csm-linux-amd64.tar.gz
 sudo install -m 755 csm-linux-amd64 /usr/local/bin/csm
 csm --version
@@ -67,7 +70,7 @@ csm --version
 ### macOS Intel
 
 ```bash
-curl -L -o csm-darwin-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-amd64-0.1.0.tar.gz
+curl -L -o csm-darwin-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-amd64-0.2.0.tar.gz
 tar -xzf csm-darwin-amd64.tar.gz
 sudo install -m 755 csm-darwin-amd64 /usr/local/bin/csm
 csm --version
@@ -76,7 +79,7 @@ csm --version
 ### macOS Apple Silicon
 
 ```bash
-curl -L -o csm-darwin-arm64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-arm64-0.1.0.tar.gz
+curl -L -o csm-darwin-arm64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-arm64-0.2.0.tar.gz
 tar -xzf csm-darwin-arm64.tar.gz
 sudo install -m 755 csm-darwin-arm64 /usr/local/bin/csm
 csm --version
@@ -84,7 +87,7 @@ csm --version
 
 ### Windows
 
-1. 从 Releases 下载 `csm-windows-amd64-0.1.0.zip`
+1. 从 Releases 下载 `csm-windows-amd64-0.2.0.zip`
 2. 解压后将 `csm-windows-amd64.exe` 重命名为 `csm.exe`
 3. 放到固定目录，例如 `C:\Tools\csm\`
 4. 把该目录加入 `PATH`
