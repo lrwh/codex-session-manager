@@ -4,7 +4,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var Version = "0.2.1"
+var Version = "0.2.2"
 var rootSessionLimit int
 var rootSessionJSON bool
 var rootSessionVerbose bool

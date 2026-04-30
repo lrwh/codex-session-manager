@@ -49,10 +49,10 @@ dist/csm-windows-amd64.exe
 Current release packages are built from the cross-platform binaries:
 
 ```bash
-tar -C dist -czf dist/csm-linux-amd64-0.2.1.tar.gz csm-linux-amd64
-tar -C dist -czf dist/csm-darwin-amd64-0.2.1.tar.gz csm-darwin-amd64
-tar -C dist -czf dist/csm-darwin-arm64-0.2.1.tar.gz csm-darwin-arm64
-(cd dist && zip -q csm-windows-amd64-0.2.1.zip csm-windows-amd64.exe)
+tar -C dist -czf dist/csm-linux-amd64-0.2.2.tar.gz csm-linux-amd64
+tar -C dist -czf dist/csm-darwin-amd64-0.2.2.tar.gz csm-darwin-amd64
+tar -C dist -czf dist/csm-darwin-arm64-0.2.2.tar.gz csm-darwin-arm64
+(cd dist && zip -q csm-windows-amd64-0.2.2.zip csm-windows-amd64.exe)
 ```
 
 ## Version Injection
@@ -60,7 +60,7 @@ tar -C dist -czf dist/csm-darwin-arm64-0.2.1.tar.gz csm-darwin-arm64
 The current version is injected at build time from `Makefile`:
 
 ```makefile
-VERSION ?= 0.2.1
+VERSION ?= 0.2.2
 LDFLAGS := -s -w -X main.version=$(VERSION)
 ```
 
@@ -68,7 +68,7 @@ LDFLAGS := -s -w -X main.version=$(VERSION)
 
 ```bash
 make test clean build-all
-git tag -a v0.2.1 -m "v0.2.1"
-git push origin v0.2.1
-gh release create v0.2.1 ...
+git tag -a v0.2.2 -m "v0.2.2"
+git push origin v0.2.2
+gh release create v0.2.2 ...
 ```

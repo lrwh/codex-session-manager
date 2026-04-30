@@ -1,6 +1,6 @@
 APP_NAME := csm
 MODULE := github.com/liurui/codex-session-manager
-VERSION ?= 0.2.1
+VERSION ?= 0.2.2
 LDFLAGS := -s -w -X main.version=$(VERSION)
 
 .PHONY: fmt test run build build-linux build-darwin build-windows build-all clean

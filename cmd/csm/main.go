@@ -6,7 +6,7 @@ import (
 	"github.com/liurui/codex-session-manager/internal/cli"
 )
 
-var version = "0.2.1"
+var version = "0.2.2"
 
 func main() {
 	cli.SetVersion(version)

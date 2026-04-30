@@ -259,10 +259,7 @@ func extractFromTarGz(archivePath string) (string, error) {
 	defer gzReader.Close()
 
 	tarReader := tar.NewReader(gzReader)
-	expected := "csm"
-	if runtime.GOOS == "windows" {
-		expected = "csm.exe"
-	}
+	expectedNames := expectedBinaryNames()
 
 	for {
 		header, err := tarReader.Next()
@@ -272,7 +269,7 @@ func extractFromTarGz(archivePath string) (string, error) {
 		if err != nil {
 			return "", err
 		}
-		if filepath.Base(header.Name) != expected {
+		if !containsString(expectedNames, filepath.Base(header.Name)) {
 			continue
 		}
 
@@ -301,9 +298,9 @@ func extractFromZip(archivePath string) (string, error) {
 	}
 	defer reader.Close()
 
-	expected := "csm.exe"
+	expectedNames := expectedBinaryNames()
 	for _, file := range reader.File {
-		if filepath.Base(file.Name) != expected {
+		if !containsString(expectedNames, filepath.Base(file.Name)) {
 			continue
 		}
 
@@ -333,6 +330,27 @@ func extractFromZip(archivePath string) (string, error) {
 	}
 
 	return "", errors.New("zip 包中未找到可执行文件")
+}
+
+func expectedBinaryNames() []string {
+	names := []string{
+		fmt.Sprintf("csm-%s-%s", runtime.GOOS, runtime.GOARCH),
+	}
+	if runtime.GOOS == "windows" {
+		names = append(names, "csm.exe", fmt.Sprintf("csm-%s-%s.exe", runtime.GOOS, runtime.GOARCH))
+		return names
+	}
+	names = append(names, "csm")
+	return names
+}
+
+func containsString(values []string, target string) bool {
+	for _, value := range values {
+		if value == target {
+			return true
+		}
+	}
+	return false
 }
 
 func replaceExecutable(extractedPath string) error {
