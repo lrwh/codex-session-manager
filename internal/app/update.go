@@ -54,6 +54,9 @@ func (a *App) Update(currentVersion string) (UpdateResult, error) {
 	if result.CurrentVersion == latestVersion {
 		return result, nil
 	}
+	if compareVersions(result.CurrentVersion, latestVersion) > 0 {
+		return result, nil
+	}
 
 	asset, err := selectReleaseAsset(release.Assets)
 	if err != nil {
@@ -351,6 +354,58 @@ func containsString(values []string, target string) bool {
 		}
 	}
 	return false
+}
+
+func compareVersions(current, latest string) int {
+	currentParts := parseVersionParts(current)
+	latestParts := parseVersionParts(latest)
+
+	maxLen := len(currentParts)
+	if len(latestParts) > maxLen {
+		maxLen = len(latestParts)
+	}
+
+	for i := 0; i < maxLen; i++ {
+		currentValue := 0
+		if i < len(currentParts) {
+			currentValue = currentParts[i]
+		}
+		latestValue := 0
+		if i < len(latestParts) {
+			latestValue = latestParts[i]
+		}
+
+		switch {
+		case currentValue > latestValue:
+			return 1
+		case currentValue < latestValue:
+			return -1
+		}
+	}
+
+	return 0
+}
+
+func parseVersionParts(version string) []int {
+	version = normalizeVersion(version)
+	fields := strings.Split(version, ".")
+	parts := make([]int, 0, len(fields))
+	for _, field := range fields {
+		field = strings.TrimSpace(field)
+		if field == "" {
+			parts = append(parts, 0)
+			continue
+		}
+		value := 0
+		for _, ch := range field {
+			if ch < '0' || ch > '9' {
+				break
+			}
+			value = value*10 + int(ch-'0')
+		}
+		parts = append(parts, value)
+	}
+	return parts
 }
 
 func replaceExecutable(extractedPath string) error {
