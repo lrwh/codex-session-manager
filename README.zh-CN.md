@@ -4,7 +4,7 @@
 
 `CSM` 是一个轻量的 Codex Session 管理工具，项目名为 `codex-session-manager`。
 
-当前版本：`0.2.0`
+当前版本：`0.2.1`
 
 它的核心目标很直接：
 
@@ -61,7 +61,7 @@ csm dashboard
 ### Linux
 
 ```bash
-curl -L -o csm-linux-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-linux-amd64-0.2.0.tar.gz
+curl -L -o csm-linux-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-linux-amd64-0.2.1.tar.gz
 tar -xzf csm-linux-amd64.tar.gz
 sudo install -m 755 csm-linux-amd64 /usr/local/bin/csm
 csm --version
@@ -70,7 +70,7 @@ csm --version
 ### macOS Intel
 
 ```bash
-curl -L -o csm-darwin-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-amd64-0.2.0.tar.gz
+curl -L -o csm-darwin-amd64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-amd64-0.2.1.tar.gz
 tar -xzf csm-darwin-amd64.tar.gz
 sudo install -m 755 csm-darwin-amd64 /usr/local/bin/csm
 csm --version
@@ -79,7 +79,7 @@ csm --version
 ### macOS Apple Silicon
 
 ```bash
-curl -L -o csm-darwin-arm64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-arm64-0.2.0.tar.gz
+curl -L -o csm-darwin-arm64.tar.gz https://github.com/lrwh/codex-session-manager/releases/latest/download/csm-darwin-arm64-0.2.1.tar.gz
 tar -xzf csm-darwin-arm64.tar.gz
 sudo install -m 755 csm-darwin-arm64 /usr/local/bin/csm
 csm --version
@@ -87,7 +87,7 @@ csm --version
 
 ### Windows
 
-1. 从 Releases 下载 `csm-windows-amd64-0.2.0.zip`
+1. 从 Releases 下载 `csm-windows-amd64-0.2.1.zip`
 2. 解压后将 `csm-windows-amd64.exe` 重命名为 `csm.exe`
 3. 放到固定目录，例如 `C:\Tools\csm\`
 4. 把该目录加入 `PATH`

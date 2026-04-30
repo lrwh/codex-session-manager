@@ -17,6 +17,7 @@ import (
 )
 
 const latestReleaseURL = "https://api.github.com/repos/lrwh/codex-session-manager/releases/latest"
+const latestReleasePageURL = "https://github.com/lrwh/codex-session-manager/releases/latest"
 
 type UpdateResult struct {
 	CurrentVersion string
@@ -99,6 +100,20 @@ func fetchLatestRelease() (githubRelease, error) {
 		return githubRelease{}, errors.New("GitHub Releases 中还没有可用版本")
 	}
 	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(io.LimitReader(resp.Body, 4096))
+		if resp.StatusCode == http.StatusForbidden || resp.StatusCode == http.StatusTooManyRequests {
+			fallback, fallbackErr := fetchLatestReleaseFromRedirect(client)
+			if fallbackErr == nil {
+				return fallback, nil
+			}
+			if len(body) > 0 {
+				return githubRelease{}, fmt.Errorf("获取最新版本失败: %s; fallback 失败: %v", strings.TrimSpace(string(body)), fallbackErr)
+			}
+			return githubRelease{}, fmt.Errorf("获取最新版本失败: %s; fallback 失败: %v", resp.Status, fallbackErr)
+		}
+		if len(body) > 0 {
+			return githubRelease{}, fmt.Errorf("获取最新版本失败: %s", strings.TrimSpace(string(body)))
+		}
 		return githubRelease{}, fmt.Errorf("获取最新版本失败: %s", resp.Status)
 	}
 
@@ -107,6 +122,74 @@ func fetchLatestRelease() (githubRelease, error) {
 		return githubRelease{}, err
 	}
 	return release, nil
+}
+
+func fetchLatestReleaseFromRedirect(client *http.Client) (githubRelease, error) {
+	req, err := http.NewRequest(http.MethodHead, latestReleasePageURL, nil)
+	if err != nil {
+		return githubRelease{}, err
+	}
+	req.Header.Set("User-Agent", "csm-updater")
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return githubRelease{}, err
+	}
+	defer resp.Body.Close()
+
+	finalURL := resp.Request.URL.String()
+	tag := extractTagFromReleaseURL(finalURL)
+	if tag == "" {
+		return githubRelease{}, fmt.Errorf("未能从 releases/latest 跳转中解析版本: %s", finalURL)
+	}
+
+	assets, err := buildReleaseAssetsFromTag(tag)
+	if err != nil {
+		return githubRelease{}, err
+	}
+
+	return githubRelease{
+		TagName: tag,
+		Assets:  assets,
+	}, nil
+}
+
+func extractTagFromReleaseURL(raw string) string {
+	const marker = "/releases/tag/"
+	index := strings.Index(raw, marker)
+	if index < 0 {
+		return ""
+	}
+	tag := strings.TrimSpace(raw[index+len(marker):])
+	tag = strings.Trim(tag, "/")
+	return tag
+}
+
+func buildReleaseAssetsFromTag(tag string) ([]githubReleaseAsset, error) {
+	version := normalizeVersion(tag)
+	if version == "" {
+		return nil, errors.New("release tag 中没有有效版本号")
+	}
+
+	base := "https://github.com/lrwh/codex-session-manager/releases/download/" + tag + "/"
+	return []githubReleaseAsset{
+		{
+			Name:               "csm-linux-amd64-" + version + ".tar.gz",
+			BrowserDownloadURL: base + "csm-linux-amd64-" + version + ".tar.gz",
+		},
+		{
+			Name:               "csm-darwin-amd64-" + version + ".tar.gz",
+			BrowserDownloadURL: base + "csm-darwin-amd64-" + version + ".tar.gz",
+		},
+		{
+			Name:               "csm-darwin-arm64-" + version + ".tar.gz",
+			BrowserDownloadURL: base + "csm-darwin-arm64-" + version + ".tar.gz",
+		},
+		{
+			Name:               "csm-windows-amd64-" + version + ".zip",
+			BrowserDownloadURL: base + "csm-windows-amd64-" + version + ".zip",
+		},
+	}, nil
 }
 
 func selectReleaseAsset(assets []githubReleaseAsset) (githubReleaseAsset, error) {
